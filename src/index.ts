@@ -4,6 +4,8 @@ import express, { Express } from 'express';
 import session from 'express-session';
 import connectSqlite3 from 'connect-sqlite3';
 
+import { indexPage } from './controllers/pageController';
+
 const app: Express = express();
 const { PORT, COOKIE_SECRET } = process.env;
 
@@ -23,10 +25,10 @@ app.use(
 app.use(express.json());
 
 app.use(express.urlencoded({ extended: false }));
-app.use(express.static('public', { extensions: ['html'] }));
+app.use(express.static('views', { extensions: ['ejs'] }));
 app.set('view engine', 'ejs');
 
-
+app.get('/', indexPage);
 
 app.listen(PORT, () => {
     console.log(`Listening at http://localhost:${PORT}`);
