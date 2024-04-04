@@ -24,9 +24,40 @@ async function addCard(name: string, type: string, id: number): Promise<Card> {
   
 }
   
-  async function getCard(name: string): Promise<Card | null> {
-    const ID = await cardRepository.findOne({ where: { name } });
-    return ID;
-  }
+async function getCard(name: string): Promise<Card | null> {
+  
+  const ID = await cardRepository.findOne({ where: { name } });
+  return ID;
+  
+}
 
-  export { addCard, getCard };
+async function getAllCards(): Promise<Card[]> {
+
+  const card = await cardRepository.find();
+
+  card.sort((a, b) => {
+    // First, sort by type
+    if (a.type < b.type) {
+        return -1;
+    }
+    if (a.type > b.type) {
+        return 1;
+    }
+    // If types are equal, sort by name
+    if (a.name < b.name) {
+        return -1;
+    }
+    if (a.name > b.name) {
+        return 1;
+    }
+    return 0;
+
+  });
+
+  console.log(card.length);
+
+  return card;
+
+}
+
+export { addCard, getCard, getAllCards };

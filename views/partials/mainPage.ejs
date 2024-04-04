@@ -1,17 +1,43 @@
-<!DOCTYPE html>
+<!DOCTYPE ejs>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hello magician</title>
+    <title>Yu-Gi-Oh! Collection</title>
     <link rel="stylesheet" href="/css/style.css" />
   </head>
+
   <body>
+    <h1>To refresh card list, click here</h1>
     <div>
       <form action="/cards" method="POST">
         <button class="btn">cards</button>
       </form>
     </div>
+
+    <div>
+      <%if(cardLength > 0){%>
+        <table border="1">
+          <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Count 1</th>
+            <th>Count 2</th>
+          </tr>
+            <%for(let i = 0; i < cardLength; i++){%>
+          
+              <tr>
+                <td><%= cards[i].name %></td>
+                <td style="text-align: center;"><%= cards[i].type %></td>
+                <td style="text-align: center;"><%= cards[i].copiesInCollection %></td>
+                <td style="text-align: center;"><%= cards[i].totalCopies %></td>
+              </tr>
+
+            <%}%>
+        </table>
+      <%}%>
+    </div>
+
   </body>

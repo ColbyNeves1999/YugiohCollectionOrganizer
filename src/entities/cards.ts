@@ -15,4 +15,10 @@ export class Card {
   @Column({ default: null })
   konamiId: number;
 
+  @Column({default: 0})
+  copiesInCollection: number;
+
+  @Column({default: 0})
+  totalCopies: number;
+  
 }

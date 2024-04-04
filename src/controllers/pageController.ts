@@ -1,8 +1,13 @@
 import { Request, Response } from 'express';
+import { getAllCards } from '../models/cardModel';
 
-function indexPage(req: Request, res: Response) {
+async function indexPage(req: Request, res: Response): Promise<void>  {
 
-    res.render("mainPage");
+    const cards = await getAllCards();
+    const cardLength = cards.length;
+
+    res.render('mainPage', { cards, cardLength });
+    //res.render("mainPage");
 
 };
 
