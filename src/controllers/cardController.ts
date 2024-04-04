@@ -18,9 +18,9 @@ async function getCardsFromPlace(req: Request, res: Response): Promise<void> {
   
     //Breaking down information for song to be added to database
     for(let i = 0; i < data.length; i++){
-      const { name, type } = data[i] as cardBody;
-      console.log(name, type);
-      await addCard(name, type);
+      const {  id, type, name } = data[i] as cardBody;
+      console.log(name, type, id);
+      await addCard(name, type, id);
     }
   
   

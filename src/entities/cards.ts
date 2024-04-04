@@ -12,4 +12,7 @@ export class Card {
   @Column({ default: null })
   type: string;
 
+  @Column({ default: null })
+  konamiId: number;
+
 }

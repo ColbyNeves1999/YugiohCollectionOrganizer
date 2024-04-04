@@ -3,7 +3,7 @@ import { Card } from '../entities/cards';
 
 const cardRepository = AppDataSource.getRepository(Card);
 
-async function addCard(name: string, type: string): Promise<Card> {
+async function addCard(name: string, type: string, id: number): Promise<Card> {
 
     const temp = await getCard(name);
   
@@ -13,6 +13,7 @@ async function addCard(name: string, type: string): Promise<Card> {
     let newCard = new Card();
     newCard.name = name;
     newCard.type = type;
+    newCard.konamiId = id;
   
     newCard = await cardRepository.save(newCard);
     return newCard;
