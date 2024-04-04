@@ -5,6 +5,7 @@ import session from 'express-session';
 import connectSqlite3 from 'connect-sqlite3';
 
 import { indexPage } from './controllers/pageController';
+import { getCardsFromPlace } from './controllers/cardController';
 
 const app: Express = express();
 const { PORT, COOKIE_SECRET } = process.env;
@@ -25,10 +26,13 @@ app.use(
 app.use(express.json());
 
 app.use(express.urlencoded({ extended: false }));
-app.use(express.static('views', { extensions: ['ejs'] }));
+app.use(express.static('public', { extensions: ['html'] }));
+app.set('views', '/Users/colby.neves/Documents/projects/YugiohCollectionOrganizer/views/partials');
 app.set('view engine', 'ejs');
 
 app.get('/', indexPage);
+
+app.post('/cards', getCardsFromPlace);
 
 app.listen(PORT, () => {
     console.log(`Listening at http://localhost:${PORT}`);
