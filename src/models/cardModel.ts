@@ -31,6 +31,50 @@ async function getCard(name: string): Promise<Card | null> {
   
 }
 
+async function incrementMainCount(cardName:string): Promise<void> {
+
+  let specificCard = await getCard(cardName);
+
+  specificCard.copiesInCollection = specificCard.copiesInCollection + 1;
+
+  specificCard = await cardRepository.save(specificCard);
+  
+}
+
+async function decrementMainCount(cardName:string): Promise<void> {
+
+  let specificCard = await getCard(cardName);
+
+  if(specificCard.copiesInCollection !== 0){
+    specificCard.copiesInCollection = specificCard.copiesInCollection - 1;
+  }
+
+  specificCard = await cardRepository.save(specificCard);
+  
+}
+
+async function incrementExtraCount(cardName:string): Promise<void> {
+
+  let specificCard = await getCard(cardName);
+
+  specificCard.totalCopies = specificCard.totalCopies + 1;
+
+  specificCard = await cardRepository.save(specificCard);
+  
+}
+
+async function decrementExtraCount(cardName:string): Promise<void> {
+
+  let specificCard = await getCard(cardName);
+
+  if(specificCard.totalCopies !== 0){
+    specificCard.totalCopies = specificCard.totalCopies - 1;
+  }
+
+  specificCard = await cardRepository.save(specificCard);
+  
+}
+
 async function getAllCards(): Promise<Card[]> {
 
   const card = await cardRepository.find();
@@ -60,4 +104,4 @@ async function getAllCards(): Promise<Card[]> {
 
 }
 
-export { addCard, getCard, getAllCards };
+export { addCard, getCard, getAllCards, incrementMainCount, decrementMainCount, incrementExtraCount, decrementExtraCount };

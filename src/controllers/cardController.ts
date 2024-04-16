@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { addCard } from '../models/cardModel';
+import { addCard, incrementMainCount, decrementMainCount, incrementExtraCount, decrementExtraCount } from '../models/cardModel';
 
 async function getCardsFromPlace(req: Request, res: Response): Promise<void> {
 
@@ -29,4 +29,46 @@ async function getCardsFromPlace(req: Request, res: Response): Promise<void> {
   
   }
 
-export {getCardsFromPlace};
+  async function incrementMain(req: Request, res: Response): Promise<void> {
+
+    const { cardName } = req.body as {cardName: string};
+
+    await incrementMainCount(cardName);
+
+    res.redirect('/');
+  
+  }
+
+  async function decrementMain(req: Request, res: Response): Promise<void> {
+
+    const { cardName } = req.body as {cardName: string};
+
+    await decrementMainCount(cardName);
+
+    res.redirect('/');
+  
+  }
+
+
+  async function incrementExtra(req: Request, res: Response): Promise<void> {
+
+    const { cardName } = req.body as {cardName: string};
+
+    await incrementExtraCount(cardName);
+
+    res.redirect('/');
+  
+  }
+
+  async function decrementExtra(req: Request, res: Response): Promise<void> {
+
+    const { cardName } = req.body as {cardName: string};
+
+    await decrementExtraCount(cardName);
+
+    res.redirect('/');
+  
+  }
+  
+
+export {getCardsFromPlace, incrementMain, decrementMain, incrementExtra, decrementExtra};

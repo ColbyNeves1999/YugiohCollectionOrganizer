@@ -23,16 +23,52 @@
           <tr>
             <th>Name</th>
             <th>Type</th>
-            <th>Count 1</th>
-            <th>Count 2</th>
+            <th>Main Count</th>
+            <th>Extra Count</th>
           </tr>
             <%for(let i = 0; i < cardLength; i++){%>
           
               <tr>
-                <td><%= cards[i].name %></td>
-                <td style="text-align: center;"><%= cards[i].type %></td>
-                <td style="text-align: center;"><%= cards[i].copiesInCollection %></td>
-                <td style="text-align: center;"><%= cards[i].totalCopies %></td>
+                <td style="width:400"><%= cards[i].name %></td>
+                <td style="text-align: center;width:200"><%= cards[i].type %></td>
+                <td style="text-align: center;width:50; height: 50;">
+
+                  <div>
+                    <form method="POST" action="/incrementMain">
+                      <input type="hidden" name="cardName" value="<%= cards[i].name %>">
+                      <button type="submit">+</button>
+                    </form>
+                  </div>
+
+                    <%= cards[i].copiesInCollection %>
+
+                  <div>
+                    <form method="POST" action="/decrementMain">
+                      <input type="hidden" name="cardName" value="<%= cards[i].name %>">
+                      <button type="submit">-</button>
+                    </form>
+                  </div>
+
+                </td>
+                <td style="text-align: center;width:50; height: 50 ;">
+                  
+                  <div>
+                    <form method="POST" action="/incrementExtra">
+                      <input type="hidden" name="cardName" value="<%= cards[i].name %>">
+                      <button type="submit">+</button>
+                    </form>
+                  </div>
+
+                  <%= cards[i].totalCopies %>
+
+                  <div>
+                    <form method="POST" action="/decrementExtra">
+                      <input type="hidden" name="cardName" value="<%= cards[i].name %>">
+                      <button type="submit">-</button>
+                    </form>
+                  </div>
+                  
+                </td>
               </tr>
 
             <%}%>
